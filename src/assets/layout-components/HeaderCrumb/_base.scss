@@ -1,0 +1,53 @@
+.breadcrumb {
+    background: none;
+	margin-bottom: 0;
+  
+    li {
+        text-transform: uppercase;
+        color: #262626;
+        margin-left: 8px;
+        a {
+            color: #262626;
+            
+        }
+    }
+    // Footer shadow
+    @include media-breakpoint-down(xs) {
+        padding-left: 6px;
+    }
+}
+
+.breadcrumb>li+li:before {
+	color: #262626;
+	font-family: FontAwesome;
+	content: "\f105";
+}
+
+.breadcrumb>.active {
+	font-weight: 600;
+	text-transform: none;
+	color: #262626;
+}
+
+.breadcrumb>li:first-child {
+	margin-left: 0;
+}
+
+
+button.link-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+button.a{
+    color:#3498db
+}
+    button.link-button:hover,
+    button.link-button:focus {
+    text-decoration: none;
+}
+  
