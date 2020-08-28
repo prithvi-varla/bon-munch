@@ -11,7 +11,8 @@ export default props => {
     dots: true,
     swipeToSlide: true,
     initialSlide: 0,
-    lazyLoad: false
+    lazyLoad: false,
+    autoplay: true
   };
   const classes = ["expanded__media", "expanded__media__slider"];
   if (fullWidth) classes.push("expanded__media__slider__full__width");

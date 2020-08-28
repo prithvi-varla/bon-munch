@@ -22,8 +22,6 @@ render() {
     } = this.props;
         
   return (
-
-    //<Form onSubmit={handleSubmit}>
       
     <Form onSubmit={handleSubmit(this.props.actionSubmit)}>
         <FormGroup>
