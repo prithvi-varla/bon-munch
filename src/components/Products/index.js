@@ -24,7 +24,11 @@ import {
   Button,
   DropdownMenu,
   DropdownItem,
-  UncontrolledAlert
+  UncontrolledAlert,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from 'reactstrap';
 
 import LoadingImage from '../../layout-components/LoadingImage'
@@ -52,10 +56,14 @@ class Products extends React.Component {
       activeOrdersPage: null,
       activeGalleryPage: null,
       action: null,
+      modal: false,
       
       isOpen: false,
       timer: null
     };
+
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
@@ -76,11 +84,15 @@ class Products extends React.Component {
 	}
 
   deleteButton(event) {
-    var test ='test';
     this.props.deleteProduct(event.currentTarget.id);
-    const authRequest = Object.assign({}, 
-      { id: event.currentTarget.id
+    this.handleCloseModal();
+    const timer = setTimeout(() => {
+      this.setState({
+        isOpen: false
       });
+    }, 3000);
+    this.setState({ timer: timer });
+    this.state.isOpen = true;
   }
 
   editExistingProduct(event) {
@@ -90,6 +102,14 @@ class Products extends React.Component {
   addNewProduct(event) {
     var test ='test';
     this.props.history.push('/Products/NewEntry');
+  }
+
+  handleOpenModal () {
+    this.setState({ modal: !this.state.modal });
+  }
+
+  handleCloseModal () {
+    this.setState({ modal: false });
   }
   
   render() {
@@ -145,6 +165,7 @@ class Products extends React.Component {
           }
 
         }
+
         return (
           <tr key={`thead-${k}`}>
           <td className="text-center">{k+1}</td>
@@ -184,66 +205,82 @@ class Products extends React.Component {
             <td className="text-center"><span dangerouslySetInnerHTML={{ __html: '&dollar;' }} />{val.price}</td>
             
             <td className="text-center">
-            <UncontrolledDropdown>
-            <DropdownToggle caret
-            color="primary"
-            className="px-2 py-0 caret">
-              Actions
-            </DropdownToggle>
-            <DropdownMenu 
-            right
-            className="dropdown-menu-xl overflow-hidden p-0">
-            <DropdownItem
-              id= {val.productId}
-              onClick={this.editExistingProduct.bind(this)}
-              >
-              <span>View details</span>
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem
-              id= {val.productId}
-              onClick={this.deleteButton.bind(this)}
-              className="text-danger mx-3">
-              <div className="nav-link-icon">
-                <FontAwesomeIcon icon={['fas', 'times']} />
-              </div>
-              <span>Delete</span>
-              </DropdownItem>
-            </DropdownMenu>
-            </UncontrolledDropdown>
               <UncontrolledDropdown>
-                <DropdownMenu
-                  right
-                  className="dropdown-menu-xl overflow-hidden p-0">
-                  <Nav
-                    pills
-                    className="nav-primary flex-column pt-2 pb-3">
-                    <NavItem className="px-3">
-                      <NavLink
-                        onClick={e => e.preventDefault()}
-                        active>
-                        <span>View details</span>
-                      </NavLink>
-                    </NavItem>
-                    <li className="dropdown-divider" />
-                    <NavItem>
-                      <NavLink
-                        id= {val.productId}
-                        onClick={this.deleteButton.bind(this)}
-                        className="text-danger mx-3">
-                        <div className="nav-link-icon">
-                          <FontAwesomeIcon icon={['fas', 'times']} />
-                        </div>
-                        <span>Delete</span>
-                      </NavLink>
-                    </NavItem>
-                  </Nav>
-                </DropdownMenu>
+              <DropdownToggle caret
+              color="primary"
+              className="px-2 py-0 caret">
+                Actions
+              </DropdownToggle>
+              <DropdownMenu 
+              right
+              className="dropdown-menu-xl overflow-hidden p-0">
+              <DropdownItem
+                id= {val.productId}
+                onClick={this.editExistingProduct.bind(this)}
+                >
+                <span>View details</span>
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem
+                id= {val.productId}
+                onClick={this.handleOpenModal}
+                className="text-danger mx-3">
+                <div className="nav-link-icon">
+                  <FontAwesomeIcon icon={['fas', 'times']} />
+                </div>
+                <span>Delete</span>
+                </DropdownItem>
+              </DropdownMenu>
+              <Modal zIndex={2000} centered isOpen={this.state.modal} toggle={this.handleOpenModal}>
+                <ModalHeader toggle={this.handleOpenModal}>Delete Warning</ModalHeader>
+                <ModalBody>
+                  <p>
+                    Are you sure you want to delete the image ?
+                  </p>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="link" className="btn-link-dark" onClick={this.handleOpenModal}>
+                    Close
+                  </Button>{' '}
+                  <Button id= {val.productId} color="primary" className="ml-auto" onClick={this.deleteButton.bind(this)}>
+                    DELETE
+                  </Button>
+                </ModalFooter>
+              </Modal>
               </UncontrolledDropdown>
+                <UncontrolledDropdown>
+                  <DropdownMenu
+                    right
+                    className="dropdown-menu-xl overflow-hidden p-0">
+                    <Nav
+                      pills
+                      className="nav-primary flex-column pt-2 pb-3">
+                      <NavItem className="px-3">
+                        <NavLink
+                          onClick={e => e.preventDefault()}
+                          active>
+                          <span>View details</span>
+                        </NavLink>
+                      </NavItem>
+                      <li className="dropdown-divider" />
+                      <NavItem>
+                        <NavLink
+                          id= {val.productId}
+                          onClick={this.deleteButton.bind(this)}
+                          className="text-danger mx-3">
+                          <div className="nav-link-icon">
+                            <FontAwesomeIcon icon={['fas', 'times']} />
+                          </div>
+                          <span>Delete</span>
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
             </td>
-
           </tr>
         )
+
       })
 
     } else {

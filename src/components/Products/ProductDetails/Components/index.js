@@ -55,7 +55,9 @@ class ProductForm extends React.Component {
 
     handleSubmitForm (formData, dispatch) {
 
-        formData.categoryId = this.state.categoryId;
+        if(this.state.categoryId) {
+            formData.categoryId = this.state.categoryId;
+        }
         formData.productCategoryMapName = this.state.productCategoryMapName;
         this.props.actionSubmit(formData);
 

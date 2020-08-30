@@ -45,7 +45,9 @@ class SubCategoryForm extends React.Component {
 
     handleSubmitForm (formData, dispatch) {
 
-        formData.parentCategoryId = this.state.parentCategoryId;
+        if (this.state.parentCategoryId) {
+            formData.parentCategoryId = this.state.parentCategoryId;
+        }
         this.props.actionSubmit(formData);
 
     }

@@ -24,7 +24,7 @@ export default props => {
         <small>
           Benefit from subscription process{" "}
           <strong>{roundNumber(temporaryDiscountPercent, 2)}% reduced</strong>{" "}
-          on subscription prcoess {isExtraSeason ? "Monthly" : "Yearly"}
+          on subscription process {isExtraSeason ? "Monthly" : "Yearly"}
         </small>
       )}
       {!hasTemporaryDiscount &&

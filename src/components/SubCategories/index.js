@@ -24,7 +24,11 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  UncontrolledAlert
+  UncontrolledAlert,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from 'reactstrap';
 
 import LoadingImage from '../../layout-components/LoadingImage'
@@ -34,7 +38,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteCategory: (id) => dispatch(deleteCategory(id)),
+  deleteCategory: (id, type) => dispatch(deleteCategory(id, type)),
   fetchAllCategories: (categoryType) => dispatch(fetchAllCategories(categoryType))
 
 });
@@ -49,10 +53,14 @@ class SubCategories extends React.Component {
       activeOrdersPage: null,
       activeGalleryPage: null,
       action: null,
+      modal: false,
 
       isOpen: true,
       timer: null
     };
+
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
@@ -77,15 +85,22 @@ class SubCategories extends React.Component {
 
   deleteButton(event) {
     var test ='test';
-    this.props.deleteCategory(event.currentTarget.id);
+    this.props.deleteCategory(event.currentTarget.id, "SUB_CATEGORY");
     const authRequest = Object.assign({}, 
       { id: event.currentTarget.id
       });
   }
 
   addNewProduct(event) {
-    var test ='test';
     this.props.history.push('/SubCategories/NewEntry');
+  }
+
+  handleOpenModal () {
+    this.setState({ modal: !this.state.modal });
+  }
+
+  handleCloseModal () {
+    this.setState({ modal: false });
   }
   
   render() {
@@ -175,7 +190,7 @@ class SubCategories extends React.Component {
             <DropdownItem divider />
             <DropdownItem
               id= {val.categoryId}
-              onClick={this.deleteButton.bind(this)}
+              onClick={this.handleOpenModal}
               className="text-danger mx-3">
               <div className="nav-link-icon">
                 <FontAwesomeIcon icon={['fas', 'times']} />
@@ -183,6 +198,22 @@ class SubCategories extends React.Component {
               <span>Delete</span>
               </DropdownItem>
             </DropdownMenu>
+            <Modal zIndex={2000} centered isOpen={this.state.modal} toggle={this.handleOpenModal}>
+              <ModalHeader toggle={this.handleOpenModal}>Delete Warning</ModalHeader>
+              <ModalBody>
+                <p>
+                  Are you sure you want to delete the image ?
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="link" className="btn-link-dark" onClick={this.handleOpenModal}>
+                  Close
+                </Button>{' '}
+                <Button id= {val.productId} color="primary" className="ml-auto" onClick={this.deleteButton.bind(this)}>
+                  DELETE
+                </Button>
+              </ModalFooter>
+            </Modal>
             </UncontrolledDropdown>
               <UncontrolledDropdown>
                 <DropdownMenu

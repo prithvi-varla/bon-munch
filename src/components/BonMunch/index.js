@@ -7,6 +7,7 @@ import MobilePhone from "../../assets/images/bonmunch/img/mobile-phone.svg";
 import Inbox from "../../assets/images/bonmunch/img/inbox.svg";
 import { Link } from "react-router-dom";
 import Hero from "../Hero";
+import raagLogo from "../../assets/images/raag.png"
 import StepsContainer, {
   StepsHeader,
   Steps,
@@ -33,6 +34,7 @@ import Helmet from "react-helmet";
 import { smoothScrollToSelector, isSSR } from "../../commons/utils";
 
 import TransparentNavbar from "../../layout-components/TransparentNavbar";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class BonMunch extends Component {
   componentDidMount() {
@@ -117,9 +119,14 @@ class BonMunch extends Component {
         </StepsContainer>
 
         <FullSection>
-          <div>
-            Some of our Customers
-          </div>
+          <ul class="site-main-menu">
+            <li>Some of our Customers</li>
+            <li>
+              <a href="https://raag-indian-cuisine.herokuapp.com/" className="btn" target="_blank">
+              <img src={raagLogo} alt="site logo" class="logo-main" />
+              </a>
+            </li>
+          </ul>
         </FullSection>
 
         <FullSection >
@@ -219,63 +226,3 @@ class BonMunch extends Component {
 }
 
 export default BonMunch;
-
-  /*
-
-
-const BonMunch = props => {
-  const [collapse, setCollapse] = useState(false);
-  const toggle = () => setCollapse(!collapse);
-  
-  return (
-    <Fragment>
-      <div className="hero-wrapper bg-composed-wrapper bg-midnight-bloom min-vh-100">
-        <div className="flex-grow-1 w-100 d-flex align-items-center">
-          <div
-            className="bg-composed-wrapper--image opacity-6"
-            style={{ backgroundImage: 'url(' + hero9 + ')' }}
-          />
-          <div className="bg-composed-wrapper--bg bg-skim-blue opacity-2" />
-          <div className="bg-composed-wrapper--content pt-5 pb-2 py-lg-5">
-            <div className="container pb-5">
-              <Row>
-                <Col lg="4" className="px-0 mx-auto d-flex align-items-center">
-                  <div className="text-center">
-                    <Badge
-                      pill
-                      color="info"
-                      className="px-4 text-uppercase h-auto py-1"
-                      id="ProjVersion123">
-                      BonMunch
-                    </Badge>
-                    <UncontrolledTooltip
-                      placement="top"
-                      target="ProjVersion123">
-                      Version: 1.0.0
-                    </UncontrolledTooltip>
-                    <div className="px-4 px-sm-0 text-white mt-4">
-                      <h1 className="display-2 mb-5 font-weight-bold">
-                        BonMunch App
-                      </h1>
-                      <p className="font-size-xl text-white-50 mb-3">
-                        ecommerce app
-                      </p>
-                      <p className="text-white font-size-lg">
-                        The ecommerce site with all the features.
-                      </p>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Fragment>
-  );
-
-  };
-
-export default BonMunch;
-
-  */

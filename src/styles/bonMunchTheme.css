@@ -1807,3 +1807,17 @@ label.success {
     max-width: 40%;
   }
 }
+
+
+.site-main-menu {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-main-menu img{
+  margin-top: -50px;
+  padding-left: 50px;
+  height: 120px;
+}

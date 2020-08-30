@@ -58,8 +58,8 @@ export const saveCategory = (data, actionName) => dispatch => {
     .catch((err) => dispatch({ type: CATEGORY_SAVE_RESPONSE_FAILED,  err }));
 };
 
-export const deleteCategory = (id) => dispatch => {
+export const deleteCategory = (id, type) => dispatch => {
   return (
     CategoryInfo.deleteCategory(id)
-  .then((deleteReponse)  => dispatch(fetchAllCategories())));
+  .then((deleteReponse)  => dispatch(fetchAllCategories(type))));
 };

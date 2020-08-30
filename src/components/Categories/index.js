@@ -24,7 +24,11 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  UncontrolledAlert
+  UncontrolledAlert,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from 'reactstrap';
 
 import LoadingImage from '../../layout-components/LoadingImage'
@@ -34,7 +38,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteCategory: (id) => dispatch(deleteCategory(id)),
+  deleteCategory: (id, type) => dispatch(deleteCategory(id, type)),
   fetchAllCategories: (categoryType) => dispatch(fetchAllCategories(categoryType))
 
 });
@@ -49,10 +53,14 @@ class Categories extends React.Component {
       activeOrdersPage: null,
       activeGalleryPage: null,
       action: null,
+      modal: false,
 
       isOpen: false,
       timer: null
     };
+
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
@@ -76,16 +84,19 @@ class Categories extends React.Component {
   }
 
   deleteButton(event) {
-    var test ='test';
-    this.props.deleteCategory(event.currentTarget.id);
-    const authRequest = Object.assign({}, 
-      { id: event.currentTarget.id
-      });
+    this.props.deleteCategory(event.currentTarget.id, "CATEGORY");
   }
 
   addNewProduct(event) {
-    var test ='test';
     this.props.history.push('/Categories/NewEntry');
+  }
+
+  handleOpenModal () {
+    this.setState({ modal: !this.state.modal });
+  }
+
+  handleCloseModal () {
+    this.setState({ modal: false });
   }
   
   render() {
