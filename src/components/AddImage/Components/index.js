@@ -34,7 +34,7 @@ class GalleryForm extends React.Component {
         saveFormData.append('files', uploadFile);
   
         if (this.uploadInput.files.length != 0 && uploadFile.size < fileSize && fileType.includes(uploadFile.type)) {
-            this.props.actionSubmit(saveFormData, formData.imageName);
+            this.props.actionSubmit(saveFormData, formData.imageName, formData.imageDescription, formData.buttonName, formData.buttonUri);
         } else {
             this.props.validateUpload();
         }
@@ -63,6 +63,31 @@ class GalleryForm extends React.Component {
                         component={renderInputField} label="Image Name"
                         validate={[ required ]}
                         />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Field name="imageDescription" type="name" id="imageDescription"
+                        htmlFor="imageDescription"
+                        component={renderInputField} label="Image Description"
+                        validate={[ required ]}
+                        />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Field name="buttonName" type="name" id="buttonName"
+                        htmlFor="buttonName"
+                        component={renderInputField} label="Button Name"
+                        validate={[ required ]}
+                        />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Field name="buttonUri" type="name" id="buttonUri"
+                        htmlFor="buttonUri"
+                        component={renderInputField} label="Button Uri"
+                        validate={[ required ]}
+                        />
+                        <span>(ex: /menu, /delivery, url's)</span>
                     </FormGroup>
 
                     <FormGroup>

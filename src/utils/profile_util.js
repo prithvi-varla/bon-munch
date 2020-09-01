@@ -1,5 +1,8 @@
+var bonmunch_endpoint = process.env.REACT_APP_BONMUNCH_END_POINT;
+
+
 export const fetchUserProfile = () => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/users?searchField=userId', {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/users?searchField=userId', {
         headers: {
             'content-type': 'application/json',
             'Authorization': 'Bearer '+localStorage.getItem("token")
@@ -10,7 +13,7 @@ export const fetchUserProfile = () => {
 
 
 export const updateUserProfile = (data, isPasswordChanged) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/users?isPasswordChanged='+isPasswordChanged, {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/users?isPasswordChanged='+isPasswordChanged, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',

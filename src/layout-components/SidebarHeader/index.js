@@ -40,7 +40,7 @@ class SidebarHeader extends Component {
                 <Fragment>
                     <div className="app-sidebar--header">
                         <div className="nav-logo">
-                            <Link to="/DashboardDefault" title="BonMunch">
+                            <Link to="/" title="BonMunch">
                                 <i>
                                     <img alt="BonMunch" src={bonMunchLogo}/>
                                 </i>

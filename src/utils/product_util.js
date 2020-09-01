@@ -1,5 +1,8 @@
+var bonmunch_endpoint = process.env.REACT_APP_BONMUNCH_END_POINT;
+
+
 export const fetchProduct = (productId) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/products/'+ productId, {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/products/'+ productId, {
         headers: {
             'content-type': 'application/json',
             'Authorization': 'Bearer '+localStorage.getItem("token")
@@ -10,7 +13,7 @@ export const fetchProduct = (productId) => {
 
 
 export const fetchAllProducts = () => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/products', {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/products', {
         headers: {
             'content-type': 'application/json',
             'Authorization': 'Bearer '+localStorage.getItem("token")
@@ -21,7 +24,7 @@ export const fetchAllProducts = () => {
 
 
 export const createProduct = (data, actionName) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/products?action='+actionName, {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/products?action='+actionName, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
@@ -33,7 +36,7 @@ export const createProduct = (data, actionName) => {
 };
 
 export const deleteProduct= (id) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/products/'+ id, {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/products/'+ id, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json',

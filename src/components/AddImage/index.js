@@ -20,7 +20,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveImage: (formData, imageType, imageName) => dispatch(uploadSingleImage(formData, imageType, imageName)),
+  saveImage: (formData, imageType, imageName, imageDescription, buttonName, buttonUri) => 
+  dispatch(uploadSingleImage(formData, imageType, imageName, imageDescription, buttonName, buttonUri)),
 });
 
 class AddImage extends Component {
@@ -43,10 +44,10 @@ class AddImage extends Component {
     this.validateUploadData = this.validateUploadData.bind(this);
   }
 
-  handleUploadData (formData, imageName) {
+  handleUploadData (formData, imageName, imageDescription, buttonName, buttonUri) {
     
     let imageType = this.state.fromPage == 'Gallery' ? 'GALLERY' : 'LANDING_PAGE'
-    this.props.saveImage(formData, imageType, imageName);
+    this.props.saveImage(formData, imageType, imageName, imageDescription, buttonName, buttonUri);
     this.setState({
       uploadStatus: true
     });

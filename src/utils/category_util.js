@@ -1,5 +1,9 @@
+
+var bonmunch_endpoint = process.env.REACT_APP_BONMUNCH_END_POINT;
+
+
 export const fetchCategoryById = (categoryId) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/categories/'+ categoryId, {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/categories/'+ categoryId, {
         headers: {
             'content-type': 'application/json',
             'Authorization': 'Bearer '+localStorage.getItem("token")
@@ -10,7 +14,7 @@ export const fetchCategoryById = (categoryId) => {
 
 
 export const fetchAllCategories = (categoryType) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/categories?categoryType='+ categoryType, {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/categories?categoryType='+ categoryType, {
         headers: {
             'content-type': 'application/json',
             'Authorization': 'Bearer '+localStorage.getItem("token")
@@ -21,7 +25,7 @@ export const fetchAllCategories = (categoryType) => {
 
 
 export const createCategory = (data, actionName) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/categories?action='+ actionName, {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/categories?action='+ actionName, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
@@ -33,7 +37,7 @@ export const createCategory = (data, actionName) => {
 };
 
 export const deleteCategory = (id) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/categories/'+ id, {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/categories/'+ id, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json',

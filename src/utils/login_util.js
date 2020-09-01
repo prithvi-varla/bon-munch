@@ -1,5 +1,8 @@
+var bonmunch_endpoint = process.env.REACT_APP_BONMUNCH_END_POINT;
+
+
 export const fetchLoginAuthentication = url => {
-    return fetch('http://localhost:8082/api/user', {
+    return fetch(bonmunch_endpoint+'/api/user', {
         headers: { 
             'Authorization': 'Bearer ' + localStorage.getItem("token") 
         }
@@ -9,7 +12,7 @@ export const fetchLoginAuthentication = url => {
 
 
 export const fetchLoginAction = (authRequest) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/login', {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/login', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'

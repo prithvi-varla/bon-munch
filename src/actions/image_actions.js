@@ -31,9 +31,9 @@ export const fetchAllImages = (imageType) => dispatch => {
   .then((allImages) => dispatch(receiveAllImages(allImages))));
 };
 
-export const uploadSingleImage = (formData, imageType, imageName) => dispatch => {
+export const uploadSingleImage = (formData, imageType, imageName, imageDescription, buttonName, buttonUri) => dispatch => {
   return (
-  ImageInfo.uploadSingleImage(formData, imageType, imageName)
+  ImageInfo.uploadSingleImage(formData, imageType, imageName, imageDescription, buttonName, buttonUri)
   .then((singleUploadResponse) => dispatch(uploadSingleImageResponse(singleUploadResponse))));
 };
 

@@ -34,7 +34,7 @@ export default class extends React.Component {
         },
         {
           title: "⚙️ Admin Login",
-          url: "http://localhost:3000/LoginPage",
+          url: "/LoginPage",
           external: true
         }
       ]

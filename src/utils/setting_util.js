@@ -1,5 +1,8 @@
+var bonmunch_endpoint = process.env.REACT_APP_BONMUNCH_END_POINT;
+
+
 export const fetchSiteSetting = () => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/sitesettings', {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/sitesettings', {
         headers: {
             'content-type': 'application/json',
             'Authorization': 'Bearer '+localStorage.getItem("token")
@@ -10,7 +13,7 @@ export const fetchSiteSetting = () => {
 
 
 export const uploadSiteSetting = (data) => {
-    return fetch('http://localhost:9091/bonmunch/v1/companies/sitesettings', {
+    return fetch(bonmunch_endpoint+'/bonmunch/v1/companies/sitesettings', {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
